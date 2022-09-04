@@ -15,3 +15,4 @@ ReactDOM.render(
   </React.StrictMode>,
   document.querySelector('#root')
 );
+console.log(ReactDOM.render);
