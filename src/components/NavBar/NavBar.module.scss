@@ -1,0 +1,62 @@
+@import '../../styles/settings.scss';
+
+/*
+.nav {
+    padding: $base-size * 2;
+    //padding-right: $base-size * 8;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    background-color: darken($color-dark, 3%);  
+    };
+    
+
+
+.icon {
+
+    a {
+        color: $color-light;
+        font-size: $base-size *2;
+        margin-left: $base-size *2;
+    }
+}
+
+.links {
+    a {
+        padding-left: $base-size * 2;
+        text-decoration: none;
+        color: $color-light;
+    }
+}*/
+.nav {
+    background-color: darken($color-dark, 3%);
+}
+.icon {
+    font-size: $base-size * 2;
+    //padding-left: $base-size * 10;
+    //padding-right: $base-size * 10;
+    display: flex;
+    justify-content: space-between;
+    
+    align-items: center;
+    font-weight: bold;
+    margin: 0 ($base-size * 10);
+    a {
+        color: $color-light;
+    }
+}
+
+
+.links {
+    
+    list-style-type: none;
+    display: inline-flex;
+    //color: $color-light;
+    li {
+        padding: $base-size;
+        a {
+            color: $color-light;
+            text-decoration: none;
+        }
+    }
+}
