@@ -3,6 +3,8 @@
 
 .nav {
     background-color: darken($color-dark, 3%);
+    
+  
 }
 .icon {
     font-size: $base-size * 2;
@@ -10,7 +12,6 @@
     //padding-right: $base-size * 10;
     display: flex;
     justify-content: space-between;
-    
     align-items: center;
     font-weight: bold;
     margin: 0 ($base-size * 10);
@@ -24,12 +25,18 @@
     
     list-style-type: none;
     display: inline-flex;
+    //text-decoration: none;
     //color: $color-light;
+    
     li {
         padding: $base-size;
+        text-decoration: none;
         a {
-            color: $color-light;
             text-decoration: none;
         }
+        a.linkActive {
+            color: $color-warning;
+          }
     }
 }
+
