@@ -1,7 +1,7 @@
 import styles from './SearchForm.module.scss';
 import TextInput from '../TextInput/TextInput';
 import Button from '../Button/Button';
-import { useState} from 'react';
+import { useState } from 'react';
 import { useDispatch} from 'react-redux';
 import { addSearchForm } from '../../redux/store';
 
@@ -16,10 +16,11 @@ const SearchForm = () => {
         dispatch(addSearchForm( searchString ));
         setSearchString('');
     };
+   
 
     return (
         <form className={styles.searchForm} onSubmit={handleSubmit}>
-            <TextInput placeholder='Search...'  onChange={(e) => setSearchString(e.target.value)} />
+            <TextInput placeholder='Search...' type='string' value={searchString} onChange={(e) => setSearchString(e.target.value)} />
             <Button>
                 <span className="fa fa-search" />
             </Button>

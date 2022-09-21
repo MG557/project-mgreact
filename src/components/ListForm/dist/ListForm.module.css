@@ -1,0 +1,14 @@
+.listForm {
+  margin: 20px auto;
+  text-align: center;
+  padding: 10px;
+}
+.listForm span {
+  margin: 10px;
+}
+@media (max-width: 768px) {
+  .listForm .listForm {
+    display: flex;
+    flex-direction: column;
+  }
+}
