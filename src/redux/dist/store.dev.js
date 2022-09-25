@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.addList = exports.addSearchForm = exports.addCard = exports.addColumn = exports.getAllLists = exports.getColumnsByList = exports.getListById = exports.getAllColumns = exports.getFilteredCards = void 0;
+exports["default"] = exports.toggleCardFavorite = exports.addList = exports.addSearchForm = exports.addCard = exports.addColumn = exports.getAllFavoriteCards = exports.getAllLists = exports.getColumnsByList = exports.getListById = exports.getAllColumns = exports.getFilteredCards = void 0;
 
 var _redux = require("redux");
 
@@ -74,10 +74,18 @@ exports.getColumnsByList = getColumnsByList;
 
 var getAllLists = function getAllLists(state) {
   return state.lists;
+};
+
+exports.getAllLists = getAllLists;
+
+var getAllFavoriteCards = function getAllFavoriteCards(state) {
+  return state.cards.filter(function (card) {
+    return card.isFavorite;
+  });
 }; // action creators
 
 
-exports.getAllLists = getAllLists;
+exports.getAllFavoriteCards = getAllFavoriteCards;
 
 var addColumn = function addColumn(payload) {
   return {
@@ -115,6 +123,15 @@ var addList = function addList(payload) {
 
 exports.addList = addList;
 
+var toggleCardFavorite = function toggleCardFavorite(payload) {
+  return {
+    type: 'TOGGLE_CARD_FAVORITE',
+    payload: payload
+  };
+};
+
+exports.toggleCardFavorite = toggleCardFavorite;
+
 var reducer = function reducer(state, action) {
   switch (action.type) {
     case 'ADD_COLUMN':
@@ -136,6 +153,15 @@ var reducer = function reducer(state, action) {
         lists: [].concat(_toConsumableArray(state.lists), [_objectSpread({
           id: (0, _shortid["default"])()
         }, action.payload)])
+      });
+
+    case 'TOGGLE_CARD_FAVORITE':
+      return _objectSpread({}, state, {
+        cards: state.cards.map(function (card) {
+          return card.id === action.payload ? _objectSpread({}, card, {
+            isFavorite: !card.isFavorite
+          }) : card;
+        })
       });
 
     case 'UPDATE_SEARCHSTRING':

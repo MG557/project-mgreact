@@ -1,0 +1,32 @@
+.card {
+  position: relative;
+  background: #fff;
+  border: 1px solid #cacfd9;
+  padding: 12px;
+  margin: 0 0 12px 0;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.favoriteButton {
+  border: none;
+  cursor: pointer;
+  background: none;
+  border-radius: 5px;
+}
+.favoriteButton:hover {
+  color: gold;
+  transition: all 0.5s;
+}
+
+.isFavorite {
+  color: #e1644e;
+  transform: scale(120%);
+  border: 1em;
+}
+.isFavorite:hover {
+  color: gold;
+  transition: all 0.5s;
+}

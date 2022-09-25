@@ -11,3 +11,28 @@
     justify-content: space-between;
     font-weight: bold;
 }
+.favoriteButton {
+    border: none;
+    cursor: pointer;
+    background: none;
+    border-radius: $radius;
+  
+  
+    &:hover {
+      color: $color-favorite;
+      transition: $transition;
+    }
+  }
+  
+  
+  .isFavorite {
+    color: $color-warning;
+    transform: scale(120%);
+    border: 1em;
+  
+    &:hover {
+      color:$color-favorite;
+      transition: $transition;
+    }
+  }
+  
