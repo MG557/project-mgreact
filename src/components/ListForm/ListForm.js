@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Button from '../Button/Button';
 import TextInput from '../TextInput/TextInput';
 import { useDispatch } from 'react-redux';
-import { addList } from '../../redux/store';
+import { addList } from '../../redux/listsRedux';
 
 const ListForm = () => {
     const [title, setTitle] = useState('');
@@ -14,7 +14,7 @@ const ListForm = () => {
         e.preventDefault();
         //dispatch({ type: 'ADD_COLUMN', newColumn: { title, icon } });
         //dispatch({type: 'ADD_COLUMN', payload: { title, icon } });
-        dispatch(addList({ title, description}));
+        dispatch(addList({ title, description }));
         setTitle('');
         setDescription('');
     }

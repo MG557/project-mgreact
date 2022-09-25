@@ -7,7 +7,8 @@ import SearchForm from '../SearchForm/SearchForm';
 //import shortid from 'shortid';
 import { useSelector } from 'react-redux';
 //import { getAllColumns } from '../../redux/store';
-import { getColumnsByList, getListById } from '../../redux/store';
+import { getListById } from '../../redux/listsRedux';
+import { getColumnsByList } from '../../redux/columnsRedux';
 import { Navigate } from 'react-router-dom';
 import { useParams } from 'react-router';
 

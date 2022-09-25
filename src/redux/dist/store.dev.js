@@ -3,32 +3,24 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.toggleCardFavorite = exports.addList = exports.addSearchForm = exports.addCard = exports.addColumn = exports.getAllFavoriteCards = exports.getAllLists = exports.getColumnsByList = exports.getListById = exports.getAllColumns = exports.getFilteredCards = void 0;
+exports["default"] = void 0;
 
 var _redux = require("redux");
 
 var _initialState = _interopRequireDefault(require("./initialState"));
 
-var _shortid = _interopRequireDefault(require("shortid"));
+var _listsRedux = _interopRequireDefault(require("./listsRedux"));
 
-var _strContains = require("../utils/strContains");
+var _columnsRedux = _interopRequireDefault(require("./columnsRedux"));
+
+var _cardsRedux = _interopRequireDefault(require("./cardsRedux"));
+
+var _searchStringRedux = _interopRequireDefault(require("./searchStringRedux"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//import shortid from 'shortid';
+//import { strContains } from '../utils/strContains';
 //selectors
 
 /*export const getFilteredCards = (state, columnId) => state.cards
@@ -38,141 +30,52 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /*export const getFilteredCards = ({ cards, searchString }, columnId) => cards
   .filter(card => card.columnId === columnId && card.title.toLowerCase().includes(searchString.toLowerCase()));
 */
-var getFilteredCards = function getFilteredCards(_ref, columnId) {
-  var cards = _ref.cards,
-      searchString = _ref.searchString;
-  return cards.filter(function (card) {
-    return card.columnId === columnId && (0, _strContains.strContains)(card.title, searchString);
-  });
-};
+//export const getAllColumns = (state) => state.columns;
+//export const getColumnsByList = ({columns}, listId) => columns.filter(column => column.listId === listId);
+//export const getListById = ({ lists }, listId) => lists.find(list => list.id === listId)
+//export const getAllLists = (state) => state.lists;
+//export const getAllFavoriteCards = (state) => state.cards.filter((card) => card.isFavorite);
+// action creators
+//export const addColumn = payload => ({ type: 'ADD_COLUMN', payload });
+//export const addCard = payload => ({ type: 'ADD_CARD', payload});
+//export const addSearchForm = payload => ({ type: 'UPDATE_SEARCHSTRING', payload});
+//export const addList = payload => ({ type: 'ADD_LIST', payload});
+//export const toggleCardFavorite = (payload) => ({type: 'TOGGLE_CARD_FAVORITE', payload});
 
-exports.getFilteredCards = getFilteredCards;
-
-var getAllColumns = function getAllColumns(state) {
-  return state.columns;
-};
-
-exports.getAllColumns = getAllColumns;
-
-var getListById = function getListById(_ref2, listId) {
-  var lists = _ref2.lists;
-  return lists.find(function (list) {
-    return list.id === listId;
-  });
-};
-
-exports.getListById = getListById;
-
-var getColumnsByList = function getColumnsByList(_ref3, listId) {
-  var columns = _ref3.columns;
-  return columns.filter(function (column) {
-    return column.listId === listId;
-  });
-};
-
-exports.getColumnsByList = getColumnsByList;
-
-var getAllLists = function getAllLists(state) {
-  return state.lists;
-};
-
-exports.getAllLists = getAllLists;
-
-var getAllFavoriteCards = function getAllFavoriteCards(state) {
-  return state.cards.filter(function (card) {
-    return card.isFavorite;
-  });
-}; // action creators
-
-
-exports.getAllFavoriteCards = getAllFavoriteCards;
-
-var addColumn = function addColumn(payload) {
-  return {
-    type: 'ADD_COLUMN',
-    payload: payload
-  };
-};
-
-exports.addColumn = addColumn;
-
-var addCard = function addCard(payload) {
-  return {
-    type: 'ADD_CARD',
-    payload: payload
-  };
-};
-
-exports.addCard = addCard;
-
-var addSearchForm = function addSearchForm(payload) {
-  return {
-    type: 'UPDATE_SEARCHSTRING',
-    payload: payload
-  };
-};
-
-exports.addSearchForm = addSearchForm;
-
-var addList = function addList(payload) {
-  return {
-    type: 'ADD_LIST',
-    payload: payload
-  };
-};
-
-exports.addList = addList;
-
-var toggleCardFavorite = function toggleCardFavorite(payload) {
-  return {
-    type: 'TOGGLE_CARD_FAVORITE',
-    payload: payload
-  };
-};
-
-exports.toggleCardFavorite = toggleCardFavorite;
-
-var reducer = function reducer(state, action) {
-  switch (action.type) {
+/*const reducer = (state, action) => {
+  switch(action.type) {
     case 'ADD_COLUMN':
-      return _objectSpread({}, state, {
-        columns: [].concat(_toConsumableArray(state.columns), [_objectSpread({
-          id: (0, _shortid["default"])()
-        }, action.payload)])
-      });
-
+      return { ...state, columns: [...state.columns, { id: shortid(), ...action.payload }]};
     case 'ADD_CARD':
-      return _objectSpread({}, state, {
-        cards: [].concat(_toConsumableArray(state.cards), [_objectSpread({
-          id: (0, _shortid["default"])()
-        }, action.payload)])
-      });
-
+      return { ...state, cards: [...state.cards, { id: shortid(), ...action.payload }]};
     case 'ADD_LIST':
-      return _objectSpread({}, state, {
-        lists: [].concat(_toConsumableArray(state.lists), [_objectSpread({
-          id: (0, _shortid["default"])()
-        }, action.payload)])
-      });
-
+        return { ...state, lists: [...state.lists, { id: shortid(), ...action.payload }]};
     case 'TOGGLE_CARD_FAVORITE':
-      return _objectSpread({}, state, {
-        cards: state.cards.map(function (card) {
-          return card.id === action.payload ? _objectSpread({}, card, {
-            isFavorite: !card.isFavorite
-          }) : card;
-        })
-      });
-
+        return { ...state, cards: state.cards.map(card => (card.id === action.payload) ? { ...card, isFavorite: !card.isFavorite } : card) };
     case 'UPDATE_SEARCHSTRING':
-      return _objectSpread({}, state, {
-        searchString: action.payload
-      });
-
+     return { ...state, searchString: action.payload };
+      
     default:
       return state;
   }
+};*/
+var subreducers = {
+  lists: _listsRedux["default"],
+  columns: _columnsRedux["default"],
+  cards: _cardsRedux["default"],
+  searchString: _searchStringRedux["default"]
 };
+var reducer = (0, _redux.combineReducers)(subreducers);
+/*const reducer = (state, action) => {
+  const newState = {
+    lists: listsReducer(state.lists, action),
+    columns: columnsReducer(state.columns, action),
+    cards: cardsReducer(state.cards, action),
+    searchString: searchStringReducer(state.searchString, action)
+  };
+
+  return newState;
+};*/
 
 var store = (0, _redux.createStore)(reducer, _initialState["default"], window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 var _default = store;
