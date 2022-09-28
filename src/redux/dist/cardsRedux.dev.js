@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.toggleCardFavorite = exports.addCard = exports.getAllFavoriteCards = exports.getFilteredCards = void 0;
+exports["default"] = exports.toggleCardFavorite = exports.removeCard = exports.addCard = exports.getAllFavoriteCards = exports.getFilteredCards = void 0;
 
 var _shortid = _interopRequireDefault(require("shortid"));
 
@@ -40,23 +40,40 @@ var getAllFavoriteCards = function getAllFavoriteCards(state) {
   return state.cards.filter(function (card) {
     return card.isFavorite;
   });
-}; // action creators
+}; // actions
 
 
 exports.getAllFavoriteCards = getAllFavoriteCards;
 
+var createActionName = function createActionName(actionName) {
+  return "app/cards/".concat(actionName);
+};
+
+var ADD_CARD = createActionName('ADD_CARD');
+var REMOVE_CARD = createActionName('REMOVE_CARD');
+var TOGGLE_CARD_FAVORITE = createActionName('TOGGLE_CARD_FAVORITE'); // action creators
+
 var addCard = function addCard(payload) {
   return {
-    type: 'ADD_CARD',
+    type: ADD_CARD,
     payload: payload
   };
 };
 
 exports.addCard = addCard;
 
+var removeCard = function removeCard(payload) {
+  return {
+    type: REMOVE_CARD,
+    payload: payload
+  };
+};
+
+exports.removeCard = removeCard;
+
 var toggleCardFavorite = function toggleCardFavorite(payload) {
   return {
-    type: 'TOGGLE_CARD_FAVORITE',
+    type: TOGGLE_CARD_FAVORITE,
     payload: payload
   };
 };
@@ -68,17 +85,25 @@ var cardsReducer = function cardsReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case 'ADD_CARD':
+    case ADD_CARD:
       return [].concat(_toConsumableArray(statePart), [_objectSpread({}, action.payload, {
         id: (0, _shortid["default"])()
       })]);
 
-    case 'TOGGLE_CARD_FAVORITE':
+    case REMOVE_CARD:
+      return statePart.filter(function (card) {
+        return card.id !== action.payload;
+      });
+
+    case TOGGLE_CARD_FAVORITE:
       return statePart.map(function (card) {
         return card.id === action.payload ? _objectSpread({}, card, {
           isFavorite: !card.isFavorite
         }) : card;
       });
+
+    /*case 'ADD_CARD_FAVORITE':
+        return statePart.map(card => (card.id === action.payload) ? { ...card, isFavorite: !card.isFavorite } : card);*/
 
     default:
       return statePart;

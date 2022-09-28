@@ -45,16 +45,23 @@ var addColumn = function addColumn(payload) {
     type: 'ADD_COLUMN',
     payload: payload
   };
-};
+}; // actions
+
 
 exports.addColumn = addColumn;
+
+var createActionName = function createActionName(actionName) {
+  return "app/columns/".concat(actionName);
+};
+
+var ADD_COLUMN = createActionName('ADD_COLUMN');
 
 var columnsReducer = function columnsReducer() {
   var statePart = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case 'ADD_COLUMN':
+    case ADD_COLUMN:
       return [].concat(_toConsumableArray(statePart), [_objectSpread({}, action.payload, {
         id: (0, _shortid["default"])()
       })]);
